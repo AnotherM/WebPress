@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>文章编辑</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">文章编辑</a>
+    </nav>
+</header>
+<main role="main" class="container mt-4">
+    <form class="form-group" th:action="@{/postEdit(uid=*{pid})}" th:object="${posts}" method="post">
+        <div>
+            <span class="alert-info" id="errors" th:text="${errors}"></span>
+        </div>
+        <div>
+            <label class="col-form-label" for="pid">PID</label>
+            <!--传递参数时候${uid}内部不可写成诸如${users.uid}-->
+            <!--将type设置为number而非text避免id插入时保存为string类型-->
+            <input class="form-control" type="text" name="pid" id="pid" th:value="*{pid}" disabled/>
+        </div>
+        <div>
+            <label class="col-form-label" for="title">标题</label>
+            <input class="form-control" type="text" name="title" id="title" th:value="*{title}" placeholder="标题"
+                   required/>
+        </div>
+        <div>
+            <label class="col-form-label" for="content">内容</label>
+            <input class="form-control" type="text" name="content" id="content" th:value="*{content}" placeholder="内容"
+                   required/>
+        </div>
+        <div>
+            <label class="col-form-label" for="date">日期</label>
+            <input class="form-control" type="date" name="author" id="date" th:value="*{date}" placeholder="日期"
+                   required/>
+        </div>
+        <div>
+            <label class="col-form-label" for="author">作者</label>
+            <input class="form-control" type="text" name="author" id="author" th:value="*{author}" placeholder="作者"
+                   required/>
+        </div>
+        <div>
+            <input class="btn btn-info form-control mt-4 mb-4" type="submit" value="提交"/>
+        </div>
+    </form>
+</main>
+<div th:replace="~{layout/footer::footer}"></div>
+
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+</body>
+</html>

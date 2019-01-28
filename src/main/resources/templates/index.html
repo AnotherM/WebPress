@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>WebPress</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">WebPress</a>
+        <form class="form-inline">
+            <a class="nav-link" th:href="@{/userList}"
+               th:unless="${session.access==null or session.user==null}">用户管理</a>
+            <a class="nav-link" th:href="@{/postList}"
+               th:unless="${session.access==null or session.user==null}">文章管理</a>
+            <a class="btn btn-primary text-white mr-1" th:href="@{/loginUser}" th:if="${session.user==null}">登陆</a>
+            <a class="btn btn-secondary text-white ml-1" th:href="@{/regUser}" th:if="${session.user==null}">注册</a>
+            <a class="btn btn-primary text-white ml-1 mr-1" th:unless="${session.user==null}"
+               th:href="@{/logoutUser}">登出</a>
+        </form>
+    </nav>
+</header>
+
+<main role="main" class="container mt-4">
+    <div class="card m-4 shadow" th:each="posts:${posts}">
+        <div class="card-body">
+            <small th:text="'No.'+${posts.pid}">
+                PID
+            </small>
+            <h5 class="card-title" th:text="${posts.title}">
+                标题
+            </h5>
+            <p class="card-text" th:text="${posts.content}">
+                内容
+            </p>
+        </div>
+        <div class="card-footer text-muted">
+            <span th:text="${posts.author}">
+                作者
+            </span>
+            <span th:text="${posts.date}">
+            时间
+            </span>
+        </div>
+    </div>
+</main>
+<div th:replace="~{layout/footer::footer}"></div>
+<script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+<script th:src="@{/js/jquery-3.3.1.min.js}" src="../static/js/jquery-3.3.1.min.js"></script>
+<script th:src="@{/js/popper.min.js}" src="../static/js/popper.min.js"></script>
+</body>
+</html>

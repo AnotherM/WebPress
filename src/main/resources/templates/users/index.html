@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>用户管理</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">用户管理</a>
+        <form class="form-inline">
+            <a class="btn btn-primary text-white" th:href="@{/addUser}">添加</a>
+            <a class="btn btn-secondary text-white ml-1" th:href="@{/logoutUser}">登出</a>
+        </form>
+    </nav>
+</header>
+<!--/addUser-->
+<main role="main" class="container mt-4">
+    <table class="table table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th>UID</th>
+            <th>用户名</th>
+            <th>密码</th>
+            <th>备忘</th>
+            <th>姓名</th>
+            <th>电子邮件</th>
+            <th>电话</th>
+            <th>身份证号</th>
+            <th>权限</th>
+            <th colspan="2">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="users:${users}">
+            <th scope="row" th:text="${users.uid}">1</th>
+            <td th:text="${users.user}">user</td>
+            <!--substring显示密码第一位，concat拼接显示界面为***-->
+            <td th:text="${users.password.substring(0,1).concat('***')}">password</td>
+            <td th:text="${users.memo}">memo</td>
+            <td th:text="${users.name}">name</td>
+            <td th:text="${users.email}">example@email.com</td>
+            <td th:text="${users.tel}">12344445555</td>
+            <td th:text="${users.id}">111222199708095658</td>
+            <td th:text="${users.access}">管理员</td>
+            <!--/editUser-->
+            <td><a class="btn btn-info" th:href="@{/editUser(uid=${users.uid})}">编辑</a></td>
+            <!--deleteUser-->
+            <td><a class="btn btn-danger" th:href="@{/deleteUser(uid=${users.uid})}">删除</a></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<div th:replace="~{layout/footer::footer}"></div>
+
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+</body>
+</html>

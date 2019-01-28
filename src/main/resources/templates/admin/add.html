@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>添加文章</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">添加文章</a>
+    </nav>
+</header>
+<!--跳转到控制器始终使用objectDo也就是对象做了什么-->
+<main role="main" class="container mt-4">
+    <form class="form-group" th:action="@{/postAdd}" method="post">
+        <div>
+            <span class="alert-info form-control" id="errors" th:text="${errors}"></span>
+        </div>
+        <div>
+            <label class="col-form-label" for="pid">UID</label>
+            <input class="form-control" type="text" name="pid" id="pid" placeholder="将会创建唯一文章标识" disabled/>
+        </div>
+        <div>
+            <label class="col-form-label" for="title">标题</label>
+            <input class="form-control" type="text" name="title" id="title" placeholder="标题" required/>
+        </div>
+        <div>
+            <label class="col-form-label" for="content">内容</label>
+            <textarea class="form-control" type="text" name="content" id="content" placeholder="内容" required></textarea>
+        </div>
+        <div>
+            <label class="col-form-label" for="date">日期</label>
+            <input class="form-control" type="date" name="date" id="date" placeholder="日期" required/>
+        </div>
+        <div>
+            <label class="col-form-label" for="author">作者</label>
+            <input class="form-control" type="text" name="author" id="author" placeholder="作者" required/>
+        </div>
+        <div>
+            <input class="btn btn-info form-control mt-4 mb-4" type="submit" value="提交" required/>
+        </div>
+    </form>
+</main>
+<div th:replace="~{layout/footer::footer}"></div>
+
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+</body>
+</html>

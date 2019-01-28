@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>用户编辑</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">用户编辑</a>
+    </nav>
+</header>
+<main role="main" class="container mt-4">
+    <form class="form-group" th:action="@{/userEdit(uid=*{uid})}" th:object="${users}" method="post">
+        <div>
+            <span class="alert-info" id="errors" th:text="${errors}"></span>
+        </div>
+        <div>
+            <label class="col-form-label" for="uid">UID</label>
+            <!--传递参数时候${uid}内部不可写成诸如${users.uid}-->
+            <!--将type设置为number而非text避免id插入时保存为string类型-->
+            <input class="form-control" type="text" name="uid" id="uid" th:value="*{uid}" disabled/>
+        </div>
+        <div>
+            <label class="col-form-label" for="user">用户名</label>
+            <input class="form-control" type="text" name="user" id="user" th:value="*{user}" placeholder="用户名"
+                   required/>
+        </div>
+        <div>
+            <label class="col-form-label" for="password">密码</label>
+            <input class="form-control" type="password" name="password" id="password" th:value="*{password}"
+                   placeholder="密码" required/>
+        </div>
+        <div>
+            <label class="col-form-label" for="memo">备忘</label>
+            <input class="form-control" type="text" name="memo" id="memo" th:value="*{memo}" placeholder="备忘"/>
+        </div>
+        <div>
+            <label class="col-form-label" for="name">姓名</label>
+            <input class="form-control" type="text" name="name" id="name" th:value="*{name}" placeholder="姓名"/>
+        </div>
+        <div>
+            <label class="col-form-label" for="email">电子邮件</label>
+            <input class="form-control" type="email" name="email" id="email" th:value="*{email}" placeholder="电子邮件"/>
+        </div>
+        <div>
+            <label class="col-form-label" for="tel">电话</label>
+            <input class="form-control" type="tel" name="tel" id="tel" th:value="*{tel}" placeholder="电话"/>
+        </div>
+        <div>
+            <label class="col-form-label" for="id">身份证号</label>
+            <input class="form-control" type="text" name="id" id="id" th:value="*{id}" placeholder="身份证号"/>
+        </div>
+        <div>
+            <label class="col-form-label" for="access">管理员权限</label>
+            <input class="custom-checkbox" type="checkbox" name="access" id="access" th:checked="*{access}"
+                   placeholder="权限"/>
+        </div>
+        <div>
+            <input class="btn btn-info form-control mt-4 mb-4" type="submit" value="提交"/>
+        </div>
+    </form>
+</main>
+<div th:replace="~{layout/footer::footer}"></div>
+
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+</body>
+</html>
